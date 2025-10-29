@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "nama": "Keripik Kentang",
+    "harga": 15000,
+    "deskripsi": "Keripik kentang renyah dengan rasa asin",
+    "kategori": "snack"
+  },
+  {
+    "id": 2,
+    "nama": "Coklat",
+    "harga": 12000,
+    "deskripsi": "Coklat dengan kualitas terbaik",
+    "kategori": "snack"
+  },
+  {
+    "id": 3,
+    "nama": "Kue Kering",
+    "harga": 18000,
+    "deskripsi": "Kue kering dengan rasa manis",
+    "kategori": "snack"
+  },
+  {
+    "id": 4,
+    "nama": "Kacang",
+    "harga": 10000,
+    "deskripsi": "Kacang panggang dengan rasa gurih",
+    "kategori": "snack"
+  }
+]
+
+
+
+
+
+

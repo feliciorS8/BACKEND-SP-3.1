@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nama": "Coca cola",
+    "harga": 8000,
+    "deskripsi": "Minuman soda menyegarkan",
+    "kategori": "drink"
+  },
+  {
+    "id": 2,
+    "nama": "Jus Jeruk",
+    "harga": 12000,
+    "deskripsi": "Jus jeruk segar",
+    "kategori": "drink"
+  },
+  {
+    "id": 3,
+    "nama": "Kopi",
+    "harga": 15000,
+    "deskripsi": "Kopi dengan kualitas terbaik",
+    "kategori": "drink"
+  },
+  {
+    "id": 4,
+    "nama": "Teh",
+    "harga": 10000,
+    "deskripsi": "Teh dengan rasa manis",
+    "kategori": "drink"
+  }
+]
