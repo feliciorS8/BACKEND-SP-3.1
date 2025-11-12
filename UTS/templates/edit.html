@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Pasien</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Edit Data Pasien</h2>
+    <form method="POST">
+        <label>ID Pasien:</label>
+        <input type="text" name="id_pasien" value="{{ pasien[0] }}" readonly>
+
+        <label>Nama Pasien:</label>
+        <input type="text" name="nama_pasien" value="{{ pasien[1] }}" required>
+
+        <label>Nomor Antrian:</label>
+        <input type="number" name="nomor_antrian" value="{{ pasien[2] }}" required>
+
+        <label>Poliklinik:</label>
+        <select name="kode_poli" required>
+            {% for poli in poliklinik %}
+            <option value="{{ poli[0] }}" {% if pasien[3] == poli[0] %}selected{% endif %}>{{ poli[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Update</button>
+        <a href="{{ url_for('index') }}">Batal</a>
+    </form>
+</body>
+</html>

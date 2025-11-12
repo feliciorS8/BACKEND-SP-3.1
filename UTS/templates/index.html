@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Pasien Rumah Sakit Yasmin</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏥 Data Pasien Rumah Sakit</h1>
+      <a href="{{ url_for('add') }}" class="btn">+ Tambah Pasien</a>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Pasien</th>
+            <th>Nama Pasien</th>
+            <th>Nomor Antrian</th>
+            <th>Kode Poli</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pasien in data_pasien %}
+          <tr>
+            <td>{{ pasien[0] }}</td>
+            <td>{{ pasien[1] }}</td>
+            <td>{{ pasien[2] }}</td>
+            <td>{{ pasien[3] }}</td>
+            <td>
+              <a href="{{ url_for('edit_pasien', id=pasien[0]) }}">Edit</a> |
+              <a
+                href="{{ url_for('delete_pasien', id=pasien[0]) }}"
+                onclick="return confirm('Yakin hapus data ini?')"
+                >Hapus</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

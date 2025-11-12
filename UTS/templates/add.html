@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Pasien</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Tambah Pasien</h2>
+    <form method="POST">
+        <label>ID Pasien:</label>
+        <input type="text" name="id_pasien" required>
+
+        <label>Nama Pasien:</label>
+        <input type="text" name="nama_pasien" required>
+
+        <label>Nomor Antrian:</label>
+        <input type="number" name="nomor_antrian" required>
+
+        <label>Poliklinik:</label>
+        <select name="kode_poli" required>
+            {% for poli in poliklinik %}
+            <option value="{{ poli[0] }}">{{ poli[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Simpan</button>
+        <a href="{{ url_for('index') }}">Kembali</a>
+    </form>
+</body>
+</html>
