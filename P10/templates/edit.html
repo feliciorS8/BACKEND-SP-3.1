@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDIT BARANG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+<div class="container">
+    <h2>Edit Barang</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Kode</label>
+                <input type="text" name="kode" class="form-control" value="{{ item.kode }}" required>
+            </div>
+
+            <div class="form-group col-md-5">
+                <label>Nama</label>
+                <input type="text" name="nama" class="form-control" value="{{ item.nama }}" required>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Harga</label>
+                <input type="number" name="harga" class="form-control" value="{{ item.harga }}" required>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Stok</label>
+                <input type="number" name="stok" class="form-control" value="{{ item.stok }}" required>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="form-group col-md-4">
+                <label>Kategori Barang</label>
+                <select name="kategori" class="form-control" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Skincare" {% if item.kategori == 'Skincare' %}selected{% endif %}>Skincare</option>
+                    <option value="Fashion" {% if item.kategori == 'Fashion' %}selected{% endif %}>Fashion</option>
+                    <option value="Makanan" {% if item.kategori == 'Makanan' %}selected{% endif %}>Makanan</option>
+                    <option value="Minuman" {% if item.kategori == 'Minuman' %}selected{% endif %}>Minuman</option>
+                    <option value="Alat Tulis" {% if item.kategori == 'Alat Tulis' %}selected{% endif %}>Alat Tulis</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Gambar Saat Ini</label><br>
+                {% if item.gambar %}
+                    <img src="/static/uploads/{{ item.gambar }}" width="140" class="img-thumbnail">
+                {% else %}
+                    <p>(Tidak Ada Gambar)</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Ganti Gambar (Opsional)</label>
+                <input type="file" name="gambar" class="form-control-file">
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-warning">Update</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

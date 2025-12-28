@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TAMBAH BARANG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+<div class="container">
+    <h2>Tambah Barang</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label>Kode Barang</label>
+                <input type="text" name="kode" class="form-control" required>
+            </div>
+
+            <div class="form-group col-md-5">
+                <label>Nama Barang</label>
+                <input type="text" name="nama" class="form-control" required>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Harga</label>
+                <input type="number" name="harga" class="form-control" required>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label>Stok</label>
+                <input type="number" name="stok" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- baris kategori + upload gambar sejajar -->
+        <div class="form-row align-items-end">
+            <div class="form-group col-md-4">
+                <label>Kategori Barang</label>
+                <select name="kategori" class="form-control" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Skincare">Skincare</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Makanan">Makanan</option>
+                    <option value="Minuman">Minuman</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Upload Gambar</label>
+                <input type="file" name="gambar" class="form-control-file">
+            </div>
+
+            <div class="form-group col-md-2 text-right">
+                <button type="submit" class="btn btn-success btn-block">Tambah</button>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary btn-block mt-2">Kembali</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
