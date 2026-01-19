@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Dokter - Admin RS Roblox</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+      <div class="container">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h1>👨‍⚕️ Kelola Dokter</h1>
+          <div style="display: flex; gap: 1rem; align-items: center">
+            <a
+              href="{{ url_for('admin_dashboard') }}"
+              style="color: white; text-decoration: none"
+              >← Dashboard</a
+            >
+            <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 2rem">
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Form Tambah Dokter -->
+      <div class="admin-form">
+        <h2 style="margin-bottom: 1.5rem; color: #0891b2">
+          ➕ Tambah Dokter Baru
+        </h2>
+        <form
+          method="POST"
+          action="{{ url_for('admin_add_dokter') }}"
+          enctype="multipart/form-data"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nama_dokter">Nama Dokter *</label>
+              <input
+                type="text"
+                id="nama_dokter"
+                name="nama_dokter"
+                class="form-control"
+                placeholder="Dr. Nama Lengkap, Sp.X"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="spesialisasi">Spesialisasi *</label>
+              <input
+                type="text"
+                id="spesialisasi"
+                name="spesialisasi"
+                class="form-control"
+                placeholder="Spesialis Anak"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="poli_id">Poli *</label>
+              <select id="poli_id" name="poli_id" class="form-control" required>
+                <option value="">-- Pilih Poli --</option>
+                {% for poli in polis %}
+                <option value="{{ poli.id }}">{{ poli.nama_poli }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="foto">Foto Dokter</label>
+              <input
+                type="file"
+                id="foto"
+                name="foto"
+                class="form-control"
+                accept="image/*"
+              />
+              <small style="color: #666">Format: JPG, PNG, GIF (Max 2MB)</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="jadwal_hari">Jadwal Hari *</label>
+              <input
+                type="text"
+                id="jadwal_hari"
+                name="jadwal_hari"
+                class="form-control"
+                placeholder="Senin - Jumat"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="jadwal_jam">Jadwal Jam *</label>
+              <input
+                type="text"
+                id="jadwal_jam"
+                name="jadwal_jam"
+                class="form-control"
+                placeholder="08:00 - 14:00"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="no_wa">Nomor WhatsApp *</label>
+            <input
+              type="tel"
+              id="no_wa"
+              name="no_wa"
+              class="form-control"
+              placeholder="6281234567890"
+              required
+            />
+            <small style="color: #666"
+              >Format internasional tanpa tanda + (contoh: 6281234567890)</small
+            >
+          </div>
+
+          <button type="submit" class="btn-add">➕ Tambah Dokter</button>
+        </form>
+      </div>
+
+      <!-- Daftar Dokter -->
+      <div style="margin-top: 2rem">
+        <h2 style="margin-bottom: 1rem; color: #0891b2">📋 Daftar Dokter</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Foto</th>
+                <th>Nama Dokter</th>
+                <th>Spesialisasi</th>
+                <th>Poli</th>
+                <th>Jadwal</th>
+                <th>WhatsApp</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dokter in dokters %}
+              <tr>
+                <td>
+                  {% if dokter.foto and dokter.foto != 'default-doctor.jpg' %}
+                  <img
+                    src="{{ url_for('static', filename='images/doctors/' + dokter.foto) }}"
+                    alt="{{ dokter.nama_dokter }}"
+                    style="
+                      width: 50px;
+                      height: 50px;
+                      border-radius: 50%;
+                      object-fit: cover;
+                    "
+                  />
+                  {% else %}
+                  <div
+                    style="
+                      width: 50px;
+                      height: 50px;
+                      border-radius: 50%;
+                      background: #e0f2fe;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.5rem;
+                    "
+                  >
+                    👨‍⚕️
+                  </div>
+                  {% endif %}
+                </td>
+                <td><strong>{{ dokter.nama_dokter }}</strong></td>
+                <td>{{ dokter.spesialisasi }}</td>
+                <td>{{ dokter.nama_poli }}</td>
+                <td>
+                  {{ dokter.jadwal_hari }}<br />
+                  <small style="color: #666">⏰ {{ dokter.jadwal_jam }}</small>
+                </td>
+                <td>{{ dokter.no_wa }}</td>
+                <td>
+                  <a
+                    href="{{ url_for('admin_delete_dokter', id=dokter.id) }}"
+                    class="btn-delete"
+                    onclick="return confirm('Yakin ingin menghapus dokter ini?')"
+                  >
+                    🗑️ Hapus
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 RS Yasmin Admin Panel. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
